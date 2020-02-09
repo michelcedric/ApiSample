@@ -1,0 +1,9 @@
+dotnet tool install --global dotnet-ef
+in the source project 
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet restore
+
+
+add migration
+dotnet ef migrations add InitialCreate -p Infrastructure/Infrastructure.csproj -s Api/api.csproj -o Data/Migrations
+dotnet ef database update -p Infrastructure/Infrastructure.csproj -s Api/api.csproj
