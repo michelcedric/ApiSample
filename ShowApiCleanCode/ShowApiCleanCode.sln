@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solutions Items", "Solutions Items", "{A910D491-8DDC-4B7A-93CA-7DD6A455463F}"
 	ProjectSection(SolutionItems) = preProject
 		Solutions Items\EF Command.txt = Solutions Items\EF Command.txt
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "src\ApplicationCore\ApplicationCore.csproj", "{DF43D770-285B-4C05-91C6-84B1D4311638}"
