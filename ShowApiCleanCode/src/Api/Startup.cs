@@ -26,6 +26,9 @@ namespace Api
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //   options.UseInMemoryDatabase("MemoryDataBase"));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
               .AddEntityFrameworkStores<ApplicationDbContext>();
 
