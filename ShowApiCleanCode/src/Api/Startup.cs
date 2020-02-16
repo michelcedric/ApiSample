@@ -1,4 +1,6 @@
-using ApplicationCore.Interfaces;
+using ApplicationCore.Interfaces.Repositories;
+using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,7 @@ namespace Api
               .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+            services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 
             services.AddControllers();
 

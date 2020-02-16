@@ -1,4 +1,4 @@
-﻿using ApplicationCore.Interfaces;
+﻿using ApplicationCore.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -11,18 +11,18 @@ namespace Api.Controllers
     {
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IWeatherForecastRepository _weatherForecastRepository;
+        private readonly IWeatherForecastService _weatherForecastService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastRepository weatherForecastRepository)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService weatherForecastService)
         {
             _logger = logger;
-            _weatherForecastRepository = weatherForecastRepository;
+            _weatherForecastService = weatherForecastService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _weatherForecastRepository.ListAllAsync();
+            var result = await _weatherForecastService.GetAllAsync();
             return Ok(result);
         }
     }

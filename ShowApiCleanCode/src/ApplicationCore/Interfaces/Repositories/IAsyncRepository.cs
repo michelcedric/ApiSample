@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Interfaces
+namespace ApplicationCore.Interfaces.Repositories
 {
     public interface IAsyncRepository<T> where T : BaseEntity
     {

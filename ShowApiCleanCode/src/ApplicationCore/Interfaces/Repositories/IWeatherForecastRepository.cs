@@ -1,6 +1,6 @@
 ﻿using ApplicationCore.Entities;
 
-namespace ApplicationCore.Interfaces
+namespace ApplicationCore.Interfaces.Repositories
 {
     public interface IWeatherForecastRepository : IAsyncRepository<WeatherForecast>
     {
