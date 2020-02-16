@@ -1,9 +1,7 @@
-﻿using ApplicationCore.Entities;
-using Infrastructure.Data;
+﻿using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
@@ -13,18 +11,19 @@ namespace Api.Controllers
     {
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ApplicationDbContext _context;
+        private readonly IWeatherForecastRepository _weatherForecastRepository;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext context)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastRepository weatherForecastRepository)
         {
             _logger = logger;
-            _context = context;
+            _weatherForecastRepository = weatherForecastRepository;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IActionResult> Get()
         {
-            return _context.WeatherForecasts.ToList();
+            var result = await _weatherForecastRepository.ListAllAsync();
+            return Ok(result);
         }
     }
 }
