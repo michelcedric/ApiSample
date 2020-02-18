@@ -2,6 +2,7 @@ using ApplicationCore.Interfaces.Repositories;
 using ApplicationCore.Interfaces.Services;
 using ApplicationCore.Services;
 using Infrastructure.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace Api
 {
@@ -25,15 +27,17 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
-                   Configuration.GetConnectionString("DefaultConnection")));
-
             //services.AddDbContext<ApplicationDbContext>(options =>
-            //   options.UseInMemoryDatabase("MemoryDataBase"));
+            //   options.UseSqlServer(
+            //       Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseInMemoryDatabase("MemoryDataBase"));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
               .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
             services.AddScoped<IWeatherForecastService, WeatherForecastService>();

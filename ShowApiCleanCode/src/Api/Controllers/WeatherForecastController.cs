@@ -1,6 +1,6 @@
-﻿using ApplicationCore.Interfaces.Services;
+﻿using Api.Features.WeatherForecast;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -9,20 +9,17 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly IMediator _mediator;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IWeatherForecastService _weatherForecastService;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService weatherForecastService)
+        public WeatherForecastController(IMediator mediator)
         {
-            _logger = logger;
-            _weatherForecastService = weatherForecastService;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _weatherForecastService.GetAllAsync();
+            var result = await _mediator.Send(new WeatherForecastRequest());
             return Ok(result);
         }
     }
