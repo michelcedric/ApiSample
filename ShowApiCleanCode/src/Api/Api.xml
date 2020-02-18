@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="T:Api.Controllers.BaseController">
+            <summary>
+            Base controller defintion
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.BaseController.StatusResultCode(System.Object)">
+            <summary>
+            Base method to return the correct http status code
+            </summary>
+            <returns></returns>       
+        </member>
+        <member name="T:Api.Controllers.WeatherForecastController">
+            <summary>
+            Controller to manage WeatherForecast
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.WeatherForecastController.#ctor(MediatR.IMediator)">
+            <summary>
+            Initialize this one
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:Api.Controllers.WeatherForecastController.Get">
+            <summary>
+            Get all existing <see cref="T:ApplicationCore.Models.Dtos.WeatherForecastDto"/>
+            </summary>
+            <returns>A list of WeatherForecastDto</returns>
+        </member>
+        <member name="T:Api.Features.WeatherForecast.WeatherForecastHandler">
+            <summary>
+            Handler use to manage a WeatherForecastRequest
+            </summary>
+        </member>
+        <member name="M:Api.Features.WeatherForecast.WeatherForecastHandler.#ctor(ApplicationCore.Interfaces.Services.IWeatherForecastService)">
+            <summary>
+            Initialize this one
+            </summary>
+            <param name="weatherForecastService"></param>
+        </member>
+        <member name="M:Api.Features.WeatherForecast.WeatherForecastHandler.Handle(Api.Features.WeatherForecast.WeatherForecastRequest,System.Threading.CancellationToken)">
+            <summary>
+            Start the handler
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Features.WeatherForecast.WeatherForecastRequest">
+            <summary>
+            Represent the defintion of the request
+            </summary>
+        </member>
+        <member name="T:Api.Program">
+            <summary>
+            Represent the entry point class
+            </summary>
+        </member>
+        <member name="M:Api.Program.Main(System.String[])">
+            <summary>
+            Entry point of the project
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create the host builder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Startup">
+            <summary>
+            Represent the startup class
+            </summary>
+        </member>
+        <member name="M:Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initialize this one
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Api.Startup.Configuration">
+            <summary>
+            Represent the configuration
+            </summary>
+        </member>
+        <member name="M:Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Infrastructure.Data.ApplicationDbContext)">
+            <summary>
+             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>
