@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using ApplicationCore.Models.Dtos;
+using MediatR;
 using System.Collections.Generic;
-using WeatherForecastDomain = ApplicationCore.Entities.WeatherForecast;
 
 namespace Api.Features.WeatherForecast
 {
-    public class WeatherForecastRequest : IRequest<IReadOnlyList<WeatherForecastDomain>>
+    public class WeatherForecastRequest : IRequest<IReadOnlyList<WeatherForecastDto>>
     {
 
     }
