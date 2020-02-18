@@ -31,7 +31,6 @@ namespace Api.Controllers
         /// </summary>
         /// <returns>A list of WeatherForecastDto</returns>
         [ProducesResponseType(typeof(IReadOnlyList<WeatherForecastDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         public async Task<IActionResult> Get()
         {

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Api.Controllers
 {
@@ -19,13 +17,6 @@ namespace Api.Controllers
             if (value == null)
             {
                 return NotFound();
-            }
-            else if (value is IEnumerable<object> values)
-            {
-                if (!values.Any())
-                {
-                    return NotFound();
-                }
             }
 
             return Ok(value);
