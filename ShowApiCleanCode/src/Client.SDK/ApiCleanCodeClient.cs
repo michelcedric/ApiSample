@@ -20,13 +20,13 @@ namespace ApiCleanCode
         /// <summary>Get all existing WeatherForecastDto</summary>
         /// <returns>A list of WeatherForecastDto</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> GetAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> WeatherForecast_GetAsync();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get all existing WeatherForecastDto</summary>
         /// <returns>A list of WeatherForecastDto</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> GetAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> WeatherForecast_GetAsync(System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -65,16 +65,16 @@ namespace ApiCleanCode
         /// <summary>Get all existing WeatherForecastDto</summary>
         /// <returns>A list of WeatherForecastDto</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> GetAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> WeatherForecast_GetAsync()
         {
-            return GetAsync(System.Threading.CancellationToken.None);
+            return WeatherForecast_GetAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get all existing WeatherForecastDto</summary>
         /// <returns>A list of WeatherForecastDto</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> GetAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecastDto>> WeatherForecast_GetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/WeatherForecast");
