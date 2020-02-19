@@ -1,7 +1,7 @@
 # ApiSample
 An API .Net Core 3.1 with EF Core with :
 - Swagger
-- CQRS
+- CQRS pattern
 - Service layer pattern
 - Repository Pattern
 - EF Core with Seed Data
