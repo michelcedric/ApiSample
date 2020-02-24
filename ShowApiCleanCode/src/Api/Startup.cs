@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +45,8 @@ namespace Api
         {
 
             // Configure Validation
-            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             //services.AddDbContext<ApplicationDbContext>(options =>
             //   options.UseSqlServer(
@@ -60,6 +62,7 @@ namespace Api
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggerPipelineBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddControllers();
@@ -124,6 +127,14 @@ namespace Api
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
+    {
+        public override void OnException(ExceptionContext context)
+        {
         }
     }
 }
