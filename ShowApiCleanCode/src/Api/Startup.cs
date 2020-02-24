@@ -1,6 +1,6 @@
+using Api.Validations;
 using ApplicationCore.Interfaces.Repositories;
-using ApplicationCore.Interfaces.Services;
-using ApplicationCore.Services;
+using FluentValidation.AspNetCore;
 using Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -43,6 +43,9 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            // Configure Validation
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             //services.AddDbContext<ApplicationDbContext>(options =>
             //   options.UseSqlServer(
             //       Configuration.GetConnectionString("DefaultConnection")));
@@ -56,7 +59,8 @@ namespace Api
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
-            services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddControllers();
 
@@ -72,7 +76,7 @@ namespace Api
                         Name = "Cédric Michel",
                         Email = "cedric.michel@outlook.be",
                         Url = new Uri("https://github.com/michelcedric/ApiSample"),
-                    }                   
+                    }
                 });
 
                 // Set the comments path for the Swagger JSON and UI.

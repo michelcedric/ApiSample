@@ -1,5 +1,6 @@
-﻿using Api.Features.WeatherForecast;
-using ApplicationCore.Models.Dtos;
+﻿using Api.Features.WeatherForecasts;
+using Api.Features.WeatherForecasts.Commands.Create;
+using Api.Features.WeatherForecasts.Queries.Get;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,15 @@ namespace Api.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new WeatherForecastRequest());
-            return StatusResultCode(result);
+            return Ok(result);
+        }
+
+        
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<IActionResult> Create(CreateWeatherForecastCommandRequest command)
+        {
+            return Created("", await _mediator.Send(command));
         }
     }
 }

@@ -2,6 +2,7 @@
 using ApplicationCore.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Data
@@ -20,9 +21,9 @@ namespace Infrastructure.Data
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+        public async Task<IReadOnlyList<T>> ListAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync(cancellationToken);
         }
 
 

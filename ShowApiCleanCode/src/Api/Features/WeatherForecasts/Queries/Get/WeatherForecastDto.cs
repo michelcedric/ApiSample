@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApplicationCore.Models.Dtos
+namespace Api.Features.WeatherForecasts.Queries.Get
 {
     public class WeatherForecastDto
     {
