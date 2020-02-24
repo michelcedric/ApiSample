@@ -6,14 +6,17 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net;
 using System.Reflection;
 
 namespace Api
@@ -135,6 +138,38 @@ namespace Api
     {
         public override void OnException(ExceptionContext context)
         {
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                // Remove the CamelCase it causes issues with Blazor (because the Properties have a lower cases)
+                // ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            //if (context.Exception is ValidationException)
+            //{
+            //    context.HttpContext.Response.ContentType = "application/json";
+            //    // BadRequest is usually used when request is not well formatted. More precise response code 422 indicates that the entity was not valid.
+            //    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+            //    context.Result = new JsonResult(new { errors = ((ValidationException)context.Exception).Failures }, jsonSerializerSettings);
+            //    return;
+            //}
+
+            if (context.Exception is DbUpdateException)
+            {
+                context.HttpContext.Response.ContentType = "application/json";
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                context.Result = new JsonResult(new { errors = new[] { "Duplicate key" }, stackTrace = context.Exception.StackTrace }, jsonSerializerSettings);
+                return;
+            }
+
+            //if (context.Exception is NotFoundException)
+            //{
+            //    code = HttpStatusCode.NotFound;
+            //}
+
+            context.HttpContext.Response.ContentType = "application/json";
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Result = new JsonResult(new { errors = new[] { context.Exception.Message }, stackTrace = context.Exception.StackTrace }, jsonSerializerSettings);
+
         }
     }
 }

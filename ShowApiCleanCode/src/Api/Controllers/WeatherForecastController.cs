@@ -39,12 +39,13 @@ namespace Api.Controllers
             return Ok(result);
         }
 
-        
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Create(CreateWeatherForecastCommandRequest command)
         {
-            return Created("", await _mediator.Send(command));
+            var result = await _mediator.Send(command);
+            return Created("", result);
         }
     }
 }

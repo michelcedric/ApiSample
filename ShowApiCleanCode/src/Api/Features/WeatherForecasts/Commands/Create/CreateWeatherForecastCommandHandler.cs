@@ -7,9 +7,10 @@ namespace Api.Features.WeatherForecasts.Commands.Create
 {
     public class CreateWeatherForecastCommandHandler : IRequestHandler<CreateWeatherForecastCommandRequest, Guid>
     {
-        public Task<Guid> Handle(CreateWeatherForecastCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateWeatherForecastCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
+            return Guid.NewGuid();
         }
     }
 }
